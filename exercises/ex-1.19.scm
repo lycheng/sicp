@@ -1,11 +1,9 @@
-(define (is-even n) (= (remainder n 2) 0))
-
 (define (fib n)
   (fib-iter 1 0 0 1 n))
 
 (define (fib-iter a b p q count)
   (cond ((= count 0) b)
-        ((is-even count)
+        ((even? count)
          (fib-iter a
                    b
                    (+ (* p p) (* q q))

@@ -1,0 +1,38 @@
+
+(define (is-nontrivial-square-root a n)
+  (and (not (= a 1))
+       (not (= a (- n 1)))
+       (= 1 (remainder (square a) n))
+       )
+  )
+
+(define (m-expmod base e m)
+  (cond ((= e 0)
+         1)
+        ((is-nontrivial-square-root base m) 0)
+        ((even? e)
+         (remainder (square (m-expmod base (/ e 2) m)) m))
+        (else
+          (remainder (* base (m-expmod base (- e 1) m)) m)))
+  )
+
+(define (mr-test a n)
+  (cond ((= a 0) true)
+        ((= (m-expmod a (- n 1) n) 1)
+         (mr-test (- a 1) n)
+         )
+        (else false)
+        )
+  )
+
+(define (mr n)
+  (mr-test (- n 1) n)
+  )
+
+(newline)
+(display (mr 561))
+(display (mr 1105))
+(display (mr 1729))
+(display (mr 2465))
+(display (mr 2821))
+(display (mr 6601))

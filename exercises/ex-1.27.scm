@@ -1,0 +1,27 @@
+(load "functions.scm")
+
+(define (f n)
+  (iter-test n 1)
+  )
+
+(define (is-congrunent a n)
+  (= (expmod a n n) a)
+  )
+
+(define (iter-test n a)
+  (cond ((= a n)
+         true)
+        ((is-congrunent a n)
+         (iter-test n (+ a 1))
+         )
+        (else false)
+        )
+  )
+
+(newline)
+(display (f 561))
+(display (f 1105))
+(display (f 1729))
+(display (f 2465))
+(display (f 2821))
+(display (f 6601))
